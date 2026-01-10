@@ -2,7 +2,7 @@ import sys
 from Networksecurity.logging import logger
 
 
-class networkSecurity(Exception):
+class NetworkSecurityException(Exception):
     def __init__(self,error_message,error_detail:sys):
         self.error_message = error_message
         _,_,exe_tb = error_detail.exc_info()
@@ -12,7 +12,7 @@ class networkSecurity(Exception):
     
     def __str__(self):
         return 'Error occur in python script[{0}] in line Number [{1}] error mesage [{2}]'.format(
-            self.line_no,self.file_name,str(self.error_message)
+            self.file_name,self.line_no,str(self.error_message)
         )
 
 if __name__=='__main__':
@@ -22,6 +22,6 @@ if __name__=='__main__':
         a=1/0
         print('this cant be printed',a)
     except Exception as e:
-        raise networkSecurity(e,sys)
+        raise NetworkSecurityException(e,sys)
 
         
