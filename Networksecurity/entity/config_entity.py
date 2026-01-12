@@ -18,12 +18,12 @@ class DataIngestionConfig:
         self.feature_store_filepath = os.path.join(
             self.dataingestion_dir,traning_pipeline.DATA_INTEGRATION_FEATURE_STORE_DIR,traning_pipeline.FILE_NAME
         )
-        self.traning_pipeline = os.path.join(
-            self.dataingestion_dir,traning_pipeline.DATA_INTEGRATION_FEATURE_STORE_DIR,traning_pipeline.TRAIN_FILE_NAME
+        self.traning_file_path = os.path.join(
+            self.dataingestion_dir,traning_pipeline.DATA_INTEGRATION_INGESTED_DIR,traning_pipeline.TRAIN_FILE_NAME
         )
-        self.testing_pipeline = os.path.join(
-            self.dataingestion_dir,traning_pipeline.DATA_INTEGRATION_FEATURE_STORE_DIR,traning_pipeline.TEST_FILE_NAME
+        self.testing_file_path = os.path.join(
+            self.dataingestion_dir,traning_pipeline.DATA_INTEGRATION_INGESTED_DIR,traning_pipeline.TEST_FILE_NAME
         )
-        self.train_test_split : float =traning_pipeline.DATA_INTEGRATION_TRAIN_TEST_SPLIR
+        self.train_test_split : float =traning_pipeline.DATA_INTEGRATION_TRAIN_TEST_SIZE
         self.collection_name :str = traning_pipeline.DATA_INTEGRATION_COLLECTION_NAME
         self.Database_name :str = traning_pipeline.DATA_INTEGRATION_DB_NAME
