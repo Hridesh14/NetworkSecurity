@@ -12,9 +12,11 @@ FILE_NAME :str = 'phisingData.csv'
 TRAIN_FILE_NAME : str = 'train.csv'
 TEST_FILE_NAME : str ='test.csv'
 
+SCHEMA_FILE_PATH  = os.path.join('Data_schema','Schema.yaml')   
+
 
 '''
-Data integretion related config strart with data integratir vir name
+Data integretion related config strart with data integratir var name
 '''
 DATA_INTEGRATION_COLLECTION_NAME : str = 'NetworkData'
 DATA_INTEGRATION_DB_NAME : str = 'HrideshNetworkAI'
@@ -23,3 +25,10 @@ DATA_INTEGRATION_FEATURE_STORE_DIR :str ='feature_store'
 DATA_INTEGRATION_INGESTED_DIR: str ='ingested'
 DATA_INTEGRATION_TRAIN_TEST_SIZE: float=0.2
 
+''' Data Validation related config starts with DATA_VALIDATION VAR NAME
+'''
+DATA_VALIDATION_DIR_NAME : str = 'data_validation'
+DATA_VALIDATION_VALID_DIR : str ='validated'
+DATA_VALIDATION_INVALID_DIR : str ='invalid'
+DATA_VALIDATION_DRIFT_REPORT_DIR : str = 'drift_report'
+DATA_VALIDATION_DRIFT_REPORT_FILE_NAME :str = 'report.yaml'

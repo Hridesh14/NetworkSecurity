@@ -1,0 +1,5 @@
+[2026-01-16 23:39:30,103] 161 numexpr.utils - INFO - NumExpr defaulting to 16 threads.
+[2026-01-16 23:39:31,551] 15 root - INFO - initate Data Inguetion
+[2026-01-16 23:39:35,829] 84 root - INFO - Performed Train test Split
+[2026-01-16 23:39:35,865] 97 root - INFO - Exported Train and Test set
+[2026-01-16 23:39:35,865] 17 root - INFO - Data Initiation completed

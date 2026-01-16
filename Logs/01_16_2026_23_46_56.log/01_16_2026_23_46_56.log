@@ -1,0 +1,10 @@
+[2026-01-16 23:46:56,800] 161 numexpr.utils - INFO - NumExpr defaulting to 16 threads.
+[2026-01-16 23:46:58,209] 15 root - INFO - initate Data Inguetion
+[2026-01-16 23:47:02,808] 84 root - INFO - Performed Train test Split
+[2026-01-16 23:47:02,843] 97 root - INFO - Exported Train and Test set
+[2026-01-16 23:47:02,844] 17 root - INFO - Data Initiation completed
+[2026-01-16 23:47:02,847] 21 root - INFO - initate Data velidation
+[2026-01-16 23:47:02,935] 35 root - INFO - Required no of column:2
+[2026-01-16 23:47:02,936] 37 root - INFO - Dataframe has columns:31
+[2026-01-16 23:47:02,936] 35 root - INFO - Required no of column:2
+[2026-01-16 23:47:02,936] 37 root - INFO - Dataframe has columns:31

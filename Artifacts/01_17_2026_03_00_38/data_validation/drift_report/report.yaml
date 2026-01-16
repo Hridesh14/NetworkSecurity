@@ -1,0 +1,93 @@
+Abnormal_URL:
+  Drift_stus: false
+  Pvalue: 0.793456747140991
+DNSRecord:
+  Drift_stus: false
+  Pvalue: 0.7860683696901033
+Domain_registeration_length:
+  Drift_stus: false
+  Pvalue: 0.9999062353866229
+Favicon:
+  Drift_stus: false
+  Pvalue: 0.995166717604938
+Google_Index:
+  Drift_stus: false
+  Pvalue: 0.5970291509297161
+HTTPS_token:
+  Drift_stus: false
+  Pvalue: 0.45991477918984003
+Iframe:
+  Drift_stus: false
+  Pvalue: 0.9890321623362285
+Links_in_tags:
+  Drift_stus: false
+  Pvalue: 0.7710771491561995
+Links_pointing_to_page:
+  Drift_stus: false
+  Pvalue: 0.7325666266216511
+Page_Rank:
+  Drift_stus: false
+  Pvalue: 0.4965219237945278
+Prefix_Suffix:
+  Drift_stus: false
+  Pvalue: 0.8685540728180071
+Redirect:
+  Drift_stus: false
+  Pvalue: 0.9982529381226167
+Request_URL:
+  Drift_stus: false
+  Pvalue: 1.0
+Result:
+  Drift_stus: false
+  Pvalue: 1.0
+RightClick:
+  Drift_stus: false
+  Pvalue: 0.9996208033369954
+SFH:
+  Drift_stus: false
+  Pvalue: 0.9999999947754254
+SSLfinal_State:
+  Drift_stus: false
+  Pvalue: 0.9999999999965016
+Shortining_Service:
+  Drift_stus: false
+  Pvalue: 0.9999654772410788
+Statistical_report:
+  Drift_stus: false
+  Pvalue: 0.6049845433946239
+Submitting_to_email:
+  Drift_stus: false
+  Pvalue: 0.9998299425911609
+URL_Length:
+  Drift_stus: false
+  Pvalue: 0.9998728965778992
+URL_of_Anchor:
+  Drift_stus: false
+  Pvalue: 0.9491766928826618
+age_of_domain:
+  Drift_stus: false
+  Pvalue: 0.7168453975391859
+double_slash_redirecting:
+  Drift_stus: false
+  Pvalue: 0.9993864328065777
+having_At_Symbol:
+  Drift_stus: false
+  Pvalue: 0.9925611176019148
+having_IP_Address:
+  Drift_stus: false
+  Pvalue: 0.9999989383967115
+having_Sub_Domain:
+  Drift_stus: false
+  Pvalue: 0.6289523183481528
+on_mouseover:
+  Drift_stus: false
+  Pvalue: 0.323278772120702
+popUpWidnow:
+  Drift_stus: false
+  Pvalue: 0.9890321623362285
+port:
+  Drift_stus: false
+  Pvalue: 0.7786069254909116
+web_traffic:
+  Drift_stus: false
+  Pvalue: 0.998821814236978

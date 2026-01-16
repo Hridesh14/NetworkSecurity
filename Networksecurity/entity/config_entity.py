@@ -27,3 +27,17 @@ class DataIngestionConfig:
         self.train_test_split : float =traning_pipeline.DATA_INTEGRATION_TRAIN_TEST_SIZE
         self.collection_name :str = traning_pipeline.DATA_INTEGRATION_COLLECTION_NAME
         self.Database_name :str = traning_pipeline.DATA_INTEGRATION_DB_NAME
+
+class DataValidationconfig:
+    def __init__(self,tranning_pipeline_config:TraningPipelineConfig):
+         self.data_velidation_dir : str = os.path.join(tranning_pipeline_config.Artifects_dir,traning_pipeline.DATA_VALIDATION_DIR_NAME)
+         self.valid_dir : str = os.path.join(self.data_velidation_dir,traning_pipeline.DATA_VALIDATION_VALID_DIR)
+         self.invalid_dir : str = os.path.join(self.data_velidation_dir,traning_pipeline.DATA_VALIDATION_INVALID_DIR)
+         self.valid_Train_path : str = os.path.join(self.valid_dir,traning_pipeline.TRAIN_FILE_NAME)
+         self.valid_Test_path : str = os.path.join(self.valid_dir,traning_pipeline.TEST_FILE_NAME)
+         self.invalid_Train_path : str = os.path.join(self.invalid_dir,traning_pipeline.TRAIN_FILE_NAME)
+         self.invalid_Test_path : str  = os.path.join(self.invalid_dir,traning_pipeline.TEST_FILE_NAME)
+         self.drift_report : str = os.path.join(
+             self.data_velidation_dir,
+             traning_pipeline.DATA_VALIDATION_DRIFT_REPORT_DIR,
+             traning_pipeline.DATA_VALIDATION_DRIFT_REPORT_FILE_NAME)
