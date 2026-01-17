@@ -4,7 +4,7 @@ import numpy as np
 
 
 '''Defining comman constant variable for traning pipeline'''
-TARGET_COLUMN_NAME :str='Result'
+TARGET_COLUMN_NAME :str= 'Result'
 PIPELINE_NAME : str='NetworkData'
 ARTIFACTS_NAME :str= 'Artifacts'
 FILE_NAME :str = 'phisingData.csv'
@@ -32,3 +32,18 @@ DATA_VALIDATION_VALID_DIR : str ='validated'
 DATA_VALIDATION_INVALID_DIR : str ='invalid'
 DATA_VALIDATION_DRIFT_REPORT_DIR : str = 'drift_report'
 DATA_VALIDATION_DRIFT_REPORT_FILE_NAME :str = 'report.yaml'
+PREPROCESSING_OBJ_FILE_NAME :str = 'preprocessing.pkl'
+
+''' Data Transformation related constant start with DATA_TRANSFORMAATION VAR NAME
+'''
+
+DATA_TRANSFORMATRION_DIR_NAME : str = 'Data_transformation'
+DATA_TRANSFORMATION_DATA_DIR : str = 'transformed'
+DATA_TRANSFORMATION_TRANSFORMED_OBJECT_DIR : str = 'Transformed_object'
+
+
+DATA_TRANSFORMATION_IMPUTER_PARAMS : dict ={
+    'missing_values':np.nan,
+    'n_neighbors':3,
+    'weights':'uniform'
+}
