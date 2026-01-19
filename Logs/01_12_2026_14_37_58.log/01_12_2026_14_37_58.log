@@ -1,4 +1,0 @@
-[2026-01-12 14:37:59,032] 161 numexpr.utils - INFO - NumExpr defaulting to 16 threads.
-[2026-01-12 14:38:00,455] 14 root - INFO - initate Data Ingustion config
-[2026-01-12 14:38:04,019] 84 root - INFO - Performed Train test Split
-[2026-01-12 14:38:04,056] 97 root - INFO - Exported Train and Test set

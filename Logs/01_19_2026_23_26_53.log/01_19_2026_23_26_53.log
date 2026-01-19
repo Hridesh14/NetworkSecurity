@@ -1,0 +1,20 @@
+[2026-01-19 23:26:53,302] 161 numexpr.utils - INFO - NumExpr defaulting to 16 threads.
+[2026-01-19 23:26:55,532] 16 root - INFO - initate Data Inguetion
+[2026-01-19 23:27:00,364] 84 root - INFO - Performed Train test Split
+[2026-01-19 23:27:00,399] 97 root - INFO - Exported Train and Test set
+[2026-01-19 23:27:00,400] 18 root - INFO - Data Initiation completed
+[2026-01-19 23:27:00,403] 22 root - INFO - initate Data velidation
+[2026-01-19 23:27:00,466] 35 root - INFO - Required no of column:2
+[2026-01-19 23:27:00,466] 37 root - INFO - Dataframe has columns:31
+[2026-01-19 23:27:00,466] 35 root - INFO - Required no of column:2
+[2026-01-19 23:27:00,466] 37 root - INFO - Dataframe has columns:31
+[2026-01-19 23:27:00,569] 24 root - INFO - initate Data velidation complted
+[2026-01-19 23:27:00,570] 27 root - INFO - Data Transformation Started
+[2026-01-19 23:27:00,570] 57 root - INFO - Entered initate data_transformation methord of DataTransformation class
+[2026-01-19 23:27:00,570] 59 root - INFO - started Data Trandsformation
+[2026-01-19 23:27:00,638] 39 root - INFO - entered get_data_transformet_object methord of transformer class 
+[2026-01-19 23:27:00,638] 44 root - INFO - Initiliase KNNImputer with {'missing_values': nan, 'n_neighbors': 3, 'weights': 'uniform'}
+[2026-01-19 23:27:00,650] 58 root - INFO - Entered the save file object method of MainUtils class
+[2026-01-19 23:27:00,653] 62 root - INFO - Exited the save_object method of MainUtils class
+[2026-01-19 23:27:00,654] 30 root - INFO - Data Transformation completed
+[2026-01-19 23:27:00,654] 33 root - INFO - model tranning started
