@@ -1,0 +1,24 @@
+[2026-01-20 13:41:21,461] 161 numexpr.utils - INFO - NumExpr defaulting to 16 threads.
+[2026-01-20 13:41:25,264] 16 root - INFO - initate Data Inguetion
+[2026-01-20 13:41:39,399] 84 root - INFO - Performed Train test Split
+[2026-01-20 13:41:39,461] 97 root - INFO - Exported Train and Test set
+[2026-01-20 13:41:39,461] 18 root - INFO - Data Initiation completed
+[2026-01-20 13:41:39,467] 22 root - INFO - initate Data velidation
+[2026-01-20 13:41:39,528] 35 root - INFO - Required no of column:2
+[2026-01-20 13:41:39,528] 37 root - INFO - Dataframe has columns:31
+[2026-01-20 13:41:39,528] 35 root - INFO - Required no of column:2
+[2026-01-20 13:41:39,528] 37 root - INFO - Dataframe has columns:31
+[2026-01-20 13:41:39,671] 24 root - INFO - initate Data velidation complted
+[2026-01-20 13:41:39,671] 27 root - INFO - Data Transformation Started
+[2026-01-20 13:41:39,671] 57 root - INFO - Entered initate data_transformation methord of DataTransformation class
+[2026-01-20 13:41:39,671] 59 root - INFO - started Data Trandsformation
+[2026-01-20 13:41:39,730] 39 root - INFO - entered get_data_transformet_object methord of transformer class 
+[2026-01-20 13:41:39,730] 44 root - INFO - Initiliase KNNImputer with {'missing_values': nan, 'n_neighbors': 3, 'weights': 'uniform'}
+[2026-01-20 13:41:39,741] 58 root - INFO - Entered the save file object method of MainUtils class
+[2026-01-20 13:41:39,743] 62 root - INFO - Exited the save_object method of MainUtils class
+[2026-01-20 13:41:39,744] 30 root - INFO - Data Transformation completed
+[2026-01-20 13:41:39,745] 33 root - INFO - model tranning started
+[2026-01-20 14:02:10,175] 58 root - INFO - Entered the save file object method of MainUtils class
+[2026-01-20 14:02:10,181] 62 root - INFO - Exited the save_object method of MainUtils class
+[2026-01-20 14:02:10,181] 137 root - INFO - model trainer artifects ModleTrainerArtifact(trained_model_file_path='Artifacts\\01_20_2026_41_13_21\\model_trainer\\trained_model\\model_trainner.pkl', train_metric_artifact=ClassificationMetricArtifact(f1_score=0.9905899018516645, precision_score=0.9870941722121396, recall_score=0.9941104792851341), test_metric_artifact=ClassificationMetricArtifact(f1_score=0.9762384212645993, precision_score=0.9696, recall_score=0.9829683698296837))
+[2026-01-20 14:02:10,185] 38 root - INFO - Model Trainer artifact created

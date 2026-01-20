@@ -20,6 +20,7 @@ from sklearn.ensemble import(
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from catboost import CatBoostClassifier
+import mlflow.catboost                                       
 
 
 
@@ -30,6 +31,19 @@ class ModelTrainner:
             self.data_transformation_artifect= data_transformatuion_artifect
         except Exception as e:
             raise NetworkSecurityException(e,sys)
+    def track_mlflow(self,best_model ,classificationmetric):
+            with mlflow.start_run():
+                f1_score = classificationmetric.f1_score
+                precision_score = classificationmetric.precision_score
+                recall_score   = classificationmetric.recall_score
+
+                mlflow.log_metric('f1_score',f1_score)
+                mlflow.log_metric('precision_score',precision_score)
+                mlflow.log_metric('recall_score',recall_score)
+                if isinstance(best_model, CatBoostClassifier):
+                    mlflow.catboost.log_model(best_model, artifact_path="model")
+                else:
+                     mlflow.sklearn.log_model(best_model, artifact_path="model")
         
     def train_model(self,x_train,y_train,x_test,y_test):
         models = {
@@ -68,18 +82,18 @@ class ModelTrainner:
         'algorithm': ['SAMME', 'SAMME.R']
     },
         'GridBoost': {  # GradientBoostingClassifier
-        'learning_rate': [0.01, 0.1, 0.2],
-        'n_estimators': [100, 200],
+        'learning_rate': [0.01, 0.1, 0.3],
+        'n_estimators': [100, 400,300],
         'subsample': [0.8, 1.0],
         'max_depth': [3, 5, 8]
     },
         'KNeighbors': {
-        'n_neighbors': [3, 5, 7, 9],
+        'n_neighbors': [3,4, 5, 7, 9],
         'weights': ['uniform', 'distance'],
         'algorithm': ['auto', 'ball_tree', 'kd_tree']
     },
          'CatBoost': {
-        'depth': [4, 6, 10],
+        'depth': [4, 6, 7,10],
         'learning_rate': [0.01, 0.03, 0.1],
         'iterations': [100, 500, 1000],
         'l2_leaf_reg': [1, 3, 5]
@@ -96,10 +110,16 @@ class ModelTrainner:
         classification_train_metric = get_classification_score(y_true=y_train,y_pred=y_train_pred)
 
 
-        # Track teh ml flow
+        # Track the expperint in mlflow
+
+        self.track_mlflow(best_model,classification_train_metric)
+
+    
+
         y_test_pred = best_model.predict(x_test)
         calcification_test_metric = get_classification_score(y_true=y_test,y_pred=y_test_pred)
-
+        
+        self.track_mlflow(best_model,calcification_test_metric)
 
         preprocessor = load_object(file_path=self.data_transformation_artifect.transformed_object_file_path)
         model_dir_pth = os.path.dirname(self.model_trainer_config.trained_model_file_path)
