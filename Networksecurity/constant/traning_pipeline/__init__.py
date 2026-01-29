@@ -15,7 +15,7 @@ TEST_FILE_NAME : str ='test.csv'
 SCHEMA_FILE_PATH  = os.path.join('Data_schema','Schema.yaml')   
 
 SAVED_MODEL_DIR =os.path.join("saved_models")
-MODEL_FILE_NAME : str = 'model_trainner.pkl'
+MODEL_FILE_NAME : str = 'model.pkl'
 
 
 '''

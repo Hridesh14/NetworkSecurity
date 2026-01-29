@@ -61,11 +61,11 @@ class Data_Transformation:
             test_df = Data_Transformation.read_data(self.datavelidation_artifect.valid_test_file_path)
 
 
-            input_feature_train_df = train_df.drop(columns=[TARGET_COLUMN_NAME],axis=1)
+            input_feature_train_df = train_df.drop(columns=[TARGET_COLUMN_NAME])
             target_feature_train_df = train_df[TARGET_COLUMN_NAME]
             target_feature_train_df = target_feature_train_df.replace(-1,0)
 
-            input_feature_test_df = test_df.drop(columns=[TARGET_COLUMN_NAME],axis=1)
+            input_feature_test_df = test_df.drop(columns=[TARGET_COLUMN_NAME])
             target_feature_test_df = test_df[TARGET_COLUMN_NAME]
             target_feature_test_df = target_feature_test_df.replace(-1,0)
 
@@ -80,7 +80,7 @@ class Data_Transformation:
             save_numpy_arry(self.dataTransformationconfig.transformed_train_file_path,array=train_arr)
             save_numpy_arry(self.dataTransformationconfig.transformed_test_file_path,array=test_arr)
             save_object(self.dataTransformationconfig.transformed_object_file_path,preprocessor_obj)
-
+            save_object('final_model/preprocessor.pkl',preprocessor_obj)
 
             data_transformation_artifect = DataTransformationArtifects(
                 transformed_object_file_path=self.dataTransformationconfig.transformed_object_file_path,

@@ -1,0 +1,22 @@
+artifact_path: file:D:/Programing/Programing_folder/Program Files/networksequrity/mlruns/0/models/m-f7dc7eaed6b348fc94f3086e4db92fd3/artifacts
+flavors:
+  catboost:
+    catboost_version: 1.2.8
+    code: null
+    data: model.cb
+    model_type: CatBoostWrapper
+    save_format: cbm
+  python_function:
+    data: model.cb
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.catboost
+    python_version: 3.12.10
+mlflow_version: 3.9.0
+model_id: m-f7dc7eaed6b348fc94f3086e4db92fd3
+model_size_bytes: 561376
+model_uuid: m-f7dc7eaed6b348fc94f3086e4db92fd3
+prompts: null
+run_id: 267b087608e0493185feefce47fe8cdf
+utc_time_created: '2026-01-29 11:38:52.058548'

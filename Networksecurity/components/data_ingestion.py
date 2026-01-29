@@ -55,7 +55,7 @@ class DataIngustion:
                 raise ValueError(f"No data found in MongoDB collection: {collection_name}")
 
             if '_id' in df.columns:
-                df = df.drop(columns=['_id'], axis=1)
+                df = df.drop(['_id'], axis=1)
             
            
             df.replace({'na': np.nan}, inplace=True)
