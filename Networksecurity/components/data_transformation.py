@@ -21,10 +21,10 @@ from Networksecurity.utils.Main_utils.utils import save_numpy_arry,save_object
 
 
 class Data_Transformation:
-    def __init__(self, datavelidationartifict:DataValidationArtifacts,
+    def __init__(self, data_validation_artifact:DataValidationArtifacts,
                  dataTransformationconfig:datatransformationconfig):
         try:
-            self.datavelidation_artifect:DataValidationArtifacts=datavelidationartifict
+            self.datavelidation_artifect:DataValidationArtifacts=data_validation_artifact
             self.dataTransformationconfig:datatransformationconfig = dataTransformationconfig
         except Exception as e:
             raise NetworkSecurityException(e,sys)

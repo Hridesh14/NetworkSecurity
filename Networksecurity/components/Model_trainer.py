@@ -1,5 +1,8 @@
 import os
 import sys
+import warnings
+
+warnings.filterwarnings("ignore", category=FutureWarning)
 
 from Networksecurity.Exception.Exception import NetworkSecurityException
 from Networksecurity.logging.logger import logging
@@ -19,19 +22,8 @@ from sklearn.ensemble import (
 )
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.base import BaseEstimator, ClassifierMixin
-from catboost import CatBoostClassifier
 import mlflow
-import mlflow.catboost
 import mlflow.sklearn
-
-# --- WRAPPER FOR CATBOOST (Fixes Scikit-learn 1.6+ compatibility) ---
-class CatBoostWrapper(CatBoostClassifier, BaseEstimator, ClassifierMixin):
-    """
-    Wrapper to ensure CatBoost works with newer Scikit-learn versions
-    by inheriting BaseEstimator properties.
-    """
-    pass
 
 class ModelTrainner:
     def __init__(self, model_trainer_config: Modeltrainerconfig, data_transformatuion_artifect: DataTransformationArtifects):
@@ -47,15 +39,9 @@ class ModelTrainner:
                 'Random Forest': RandomForestClassifier(verbose=1),
                 'Decision Tree': DecisionTreeClassifier(),
                 'Logistic Regressor': LogisticRegression(verbose=1),
-                
-                # --- FIX: Explicitly use 'SAMME' to stop warnings ---
-                'AdaBoost': AdaBoostClassifier(algorithm='SAMME'),
-                
+                'AdaBoost': AdaBoostClassifier(), 
                 'GridBoost': GradientBoostingClassifier(),
                 'KNeighbors': KNeighborsClassifier(),
-                
-                # --- FIX: Use Wrapper for CatBoost ---
-                'CatBoost': CatBoostWrapper(verbose=False), 
             }
 
             param_dict = {
@@ -90,12 +76,6 @@ class ModelTrainner:
                     'n_neighbors': [3, 5, 7, 9],
                     'weights': ['uniform', 'distance'],
                     'algorithm': ['auto', 'ball_tree', 'kd_tree']
-                },
-                'CatBoost': {
-                    'depth': [4, 6, 10],
-                    'learning_rate': [0.01, 0.05, 0.1],
-                    'iterations': [100, 500],
-                    'l2_leaf_reg': [1, 3, 5]
                 }
             }
 
@@ -136,10 +116,7 @@ class ModelTrainner:
                 mlflow.log_param("best_model_name", best_model_name)
 
                 # Log Model
-                if isinstance(best_model, (CatBoostClassifier, CatBoostWrapper)):
-                    mlflow.catboost.log_model(best_model, artifact_path="model")
-                else:
-                    mlflow.sklearn.log_model(best_model, artifact_path="model")
+                mlflow.sklearn.log_model(best_model, artifact_path="model")
 
             # 5. Save Model Locally
             preprocessor = load_object(file_path=self.data_transformation_artifect.transformed_object_file_path)
