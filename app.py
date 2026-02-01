@@ -1,89 +1,86 @@
 import sys
 import os
-
 import certifi
-ca = certifi.where()
+import pandas as pd
+import pymongo
+import re
+from urllib.parse import urlparse
 
 from dotenv import load_dotenv
-load_dotenv()
+from fastapi import FastAPI, UploadFile, Request, File, Form
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import Response, FileResponse
+from fastapi.templating import Jinja2Templates
+from uvicorn import run as app_run
 
-mongo_db_url = os.getenv('MONGO_DB_URL')
-
-
-import pymongo
-
+# Custom Imports (Aapke project structure ke hisab se)
 from Networksecurity.Exception.Exception import NetworkSecurityException
 from Networksecurity.logging.logger import logging
 from Networksecurity.pipeline.Tranning_pipeline import TranningPipeline
-from fastapi.templating import Jinja2Templates
-
-# Initialize the templates object
-# Ensure you have a folder named 'templates' in your project directory
-templates = Jinja2Templates(directory="templates")
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi import FastAPI,UploadFile,Request,File
-from uvicorn import run as app_run
-from fastapi.responses import Response
-from starlette.responses import Response
-from starlette.responses import RedirectResponse
 from Networksecurity.utils.ml_utils.model.estimater import NetworkModel
-import pandas as pd
-
-
 from Networksecurity.utils.Main_utils.utils import load_object
+from Networksecurity.constant.traning_pipeline import DATA_INTEGRATION_COLLECTION_NAME, DATA_INTEGRATION_DB_NAME
 
-client = pymongo.MongoClient(mongo_db_url,tlsCAFile=ca,tlsAllowInvalidCertificates=True, 
-                serverSelectionTimeoutMS=5000)
+# --- Config ---
+load_dotenv()
+mongo_db_url = os.getenv('MONGO_DB_URL')
+ca = certifi.where()
 
-from Networksecurity.constant.traning_pipeline import DATA_INTEGRATION_COLLECTION_NAME,DATA_INTEGRATION_DB_NAME
+client = pymongo.MongoClient(mongo_db_url, tlsCAFile=ca, tlsAllowInvalidCertificates=True, serverSelectionTimeoutMS=5000)
 database = client[DATA_INTEGRATION_DB_NAME]
 collection = database[DATA_INTEGRATION_COLLECTION_NAME]
 
 app = FastAPI()
-origin = ['*']
+templates = Jinja2Templates(directory="templates")
+
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI()
+
+# This tells the browser: "It is okay to talk to this server."
 app.add_middleware(
     CORSMiddleware,
-    allow_origins = origin,
-    allow_credentials = True,
-    allow_methods =['*'],
-    allow_headers =['*'],
+    allow_origins=["*"],  # Allows all connections
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
-@app.get('/',tags=['authentication'])
-async def index():
-    return RedirectResponse(url='/docs')
-
-@app.get('/train')
-async def train_route():
+@app.post("/Predict")
+async def predict_file_route(request: Request, file: UploadFile = File(...)):
     try:
-        train_Pipeline = TranningPipeline()
-        train_Pipeline.run_pipeline()
-        return Response('Tranning is successful')
-    except Exception as e:
-            raise NetworkSecurityException(e, sys) 
-@app.post('/Predict')
-async def predict_route(request:Request,file:UploadFile=File(...)):
-     try:
-        df = pd.read_csv(file.file)
-
         preprocessor = load_object('final_model/preprocessor.pkl')
-        final_model  = load_object('final_model/model.pkl')
+        final_model = load_object('final_model/model.pkl')
+        network_model = NetworkModel(preprocessor=preprocessor, model=final_model)
 
-        network_model =NetworkModel(preprocessor=preprocessor,model=final_model)
-        print(df.iloc[0])
+        df = pd.read_csv(file.file)
+        
+       
+        if hasattr(preprocessor, 'feature_names_in_'):
+            df = df[preprocessor.feature_names_in_]
+        elif hasattr(final_model, 'feature_names_in_'):
+             df = df[final_model.feature_names_in_]
+
         y_pred = network_model.predict(df)
-        print(y_pred)
         df['predicted_column'] = y_pred
-        print(df['predicted_column'])
-        df.to_csv('prediction_output/output.csv')
-        table_html = df.to_html(classes='table table-striped')
-        return templates.TemplateResponse('Table.html',{'request':request,'table':table_html})
-     except Exception as e:
-            raise NetworkSecurityException(e, sys) 
-     
+        df['predicted_label'] = df['predicted_column'].replace({1: 'Phishing (Unsafe)', 0: 'Legitimate (Safe)'})
 
+        table_html = df.to_html(classes='table table-striped table-bordered')
+        return templates.TemplateResponse("Table.html", {"request": request, "table": table_html})
 
-if __name__ == '__main__':
-     app_run(app,host='localhost',port=8000)
+    except Exception as e:
+        raise NetworkSecurityException(e, sys)
 
+@app.get("/", tags=['authentication'])
+async def index(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
+
+@app.get("/train")
+async def train_route():
+    train_pipeline = TranningPipeline()
+    train_pipeline.run_pipeline()
+    return Response("Training is successful")
+
+if __name__ == "__main__":
+    app_run(app, host="localhost", port=8000)

@@ -110,4 +110,20 @@ def Evaluate_models(x_train,y_train,x_test,y_test,models,parems):
     except Exception as e:
         raise NetworkSecurityException(e,sys)
 
+import re
+from urllib.parse import urlparse
 
+def extract_features_from_url(url:str):
+    features ={}
+    features['url_length']=len(url)
+    parsed_url = urlparse(url)
+    features['hostname_length'] = len(parsed_url.netloc)
+    features['path_length'] = len(parsed_url.path)
+    features['count_at'] = url.count('@')
+    features['count_question'] = url.count('?')
+    features['count_hyphen'] = url.count('-')
+    features['count_equal'] = url.count('=')
+    ip_pattern = r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'
+    features['has_ip'] = 1 if re.search(ip_pattern, url) else 0
+
+    return features
